@@ -17,10 +17,10 @@ class FileDirectorySpec extends FlatSpec with BeforeAndAfterAll {
   }
 
   "file list should return " should "following type of file" in {
-    val actualResult = fileDir.callingMain("/home/knoldus/Downloads/Check")
+    val actualResult = fileDir.callingMain("/home/knoldus/Downloads/assignment-scala01-1.zip/ThreadExample")
     val expectedResult ="Future(Success(List(SecondInsideSecond.txt, SecondInsideSecond2.txt, InsideFirst2.txt, insideFirst.txt, InsideSecond.txt, main.txt, )))"
     assert(expectedResult == actualResult)
   }
 
-  
+
 }

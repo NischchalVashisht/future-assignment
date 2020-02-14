@@ -22,7 +22,7 @@ class FIleInDirectory {
       case headOfFile :: Nil => {
         if (headOfFile.isFile) headOfFile.getName :: listOfFile
         else iteratingOverDirectory(headOfFile.listFiles().toList, listOfFile)
-        }
+      }
       case headOfFile :: tailOfFile => {
         if (headOfFile.isFile)
           iteratingOverDirectory(tailOfFile, headOfFile.getName :: listOfFile)
@@ -31,24 +31,30 @@ class FIleInDirectory {
       }
     }
   }
+
+
+  def callingMain(input: String):String = {
+    //val fileReference = new FIleInDirectory
+    val listOfMainFiles = this.getListOfFiles(input)
+    val result = Future {
+      this.iteratingOverDirectory(listOfMainFiles, List(""))
+    }
+    //println(result)
+
+  //  println(result.mkString("--"))
+    result.onComplete {
+      case Success(listOfMainFiles) =>listOfMainFiles.mkString("--")
+      case Failure(exception) => exception
+
+    }
+    Thread.sleep(5000)
+result.toString
+  }
+
 }
+/*
+object FIleInDirectory extends App{
 
-object FIleInDirectory extends App {
-  val fileReference= new FIleInDirectory
-  val listOfMainFiles = fileReference.getListOfFiles("/home/knoldus/Downloads/Check")
-   val result=Future{
-        fileReference.iteratingOverDirectory(listOfMainFiles, List(""))
-   }
-  //println(result)
-   Thread.sleep(10000)
-   println("sjkd"+result)
-   result.onComplete{
-     case Success(listOfMainFiles)=>println(s"files is $listOfMainFiles is "+result)
-     case Failure(exception) =>println(exception.getMessage)
+  println(new FIleInDirectory().callingMain("/home/knoldus/Downloads/Check"))
 
-   }
-
-
-}
-
-
+}*/
